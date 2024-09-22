@@ -1,7 +1,7 @@
 {
   "name": "smart-ludo",
   "version": "0.1.0",
-  "homepage": " https://vinod-mahor.github.io/smart-ludo-new",
+  "homepage": " https://vinod-mahor.github.io/smart-ludo",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
