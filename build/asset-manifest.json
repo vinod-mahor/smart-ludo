@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/smart-ludo/static/css/main.64c91bc6.css",
+    "main.js": "/smart-ludo/static/js/main.f981a8c0.js",
+    "static/js/453.658eb477.chunk.js": "/smart-ludo/static/js/453.658eb477.chunk.js",
+    "static/media/diceRollingSoundEffect.mp3": "/smart-ludo/static/media/diceRollingSoundEffect.25c3ebd9c708582c758d.mp3",
+    "static/media/readyToRoll.mp3": "/smart-ludo/static/media/readyToRoll.08acd6a4106841a511ad.mp3",
+    "static/media/cheera.png.png": "/smart-ludo/static/media/cheera.png.d52a6d6f051b0df2a7b5.png",
+    "static/media/greenGoti.png": "/smart-ludo/static/media/greenGoti.9ce9413f5b8af797ac5e.png",
+    "static/media/blueGoti.png": "/smart-ludo/static/media/blueGoti.58c8b93f4ea3a42f98b5.png",
+    "static/media/yellowGoti.png": "/smart-ludo/static/media/yellowGoti.e4daa52fcc5dfe005054.png",
+    "static/media/redGoti.png": "/smart-ludo/static/media/redGoti.26cc48f22094d1be3d2a.png",
+    "static/media/logo.svg": "/smart-ludo/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/victoryBox.svg": "/smart-ludo/static/media/victoryBox.29905e48adb76ceb3e5e.svg",
+    "index.html": "/smart-ludo/index.html",
+    "main.64c91bc6.css.map": "/smart-ludo/static/css/main.64c91bc6.css.map",
+    "main.f981a8c0.js.map": "/smart-ludo/static/js/main.f981a8c0.js.map",
+    "453.658eb477.chunk.js.map": "/smart-ludo/static/js/453.658eb477.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.64c91bc6.css",
+    "static/js/main.f981a8c0.js"
+  ]
+}
