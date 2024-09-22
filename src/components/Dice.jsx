@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserActive, setTernSkippedOrNot } from '../App/Slices/TernSlice';
+import { setTernSkippedOrNot } from '../App/Slices/TernSlice';
 import { upDateDice } from '../App/Slices/DiceSlice.js';
 import { setChangeColorInterval, clearChangeColorInterval } from '../App/Slices/IntervalSlice.js';
 import { unLockTern } from '../App/Slices/MoveControllerSlice.js';
@@ -30,6 +30,8 @@ const Dice = (props) => {
     const playDiceSould = (soundName) => {
         const diceSound = new Audio(DiceRollingSould);
         const readyToRollSound = new Audio(ReadyToRallSound);
+        diceSound.volume = 1;
+        readyToRollSound.volume = 0.3
         switch (soundName) {
             case "roll":
                 diceSound.play();
@@ -37,12 +39,9 @@ const Dice = (props) => {
             case "readyToRoll":
                 readyToRollSound.play();
                 break;
-
             default:
                 break;
         }
-
-
     }
 
     useEffect(() => {
@@ -296,7 +295,7 @@ const Dice = (props) => {
             }
 
         }
-       
+
         setTimeout(() => {
             setIsDisabledDice(false);
         }, 2500);

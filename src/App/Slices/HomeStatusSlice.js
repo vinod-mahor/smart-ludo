@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    // initial state has changed for development only
+ 
     blueToken: ["inside", "inside", "inside", "inside"],
     redToken: ["inside", "inside", "inside", "inside"],
     greenToken: ["inside", "inside", "inside", "inside"],
