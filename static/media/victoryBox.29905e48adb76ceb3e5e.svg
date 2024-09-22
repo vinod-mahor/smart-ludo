@@ -1,0 +1,11 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="166px" height="167px" viewBox="-0.5 -0.5 166 167" content="&lt;mxfile&gt;&lt;diagram id=&quot;N_k6_kuOXXpxyU01vGDw&quot; name=&quot;Page-1&quot;&gt;zZbPl5sgEMf/Go/dB7qbH8cm3e5eemkOPdOAyisyPiTR7F9fUFCsyVu3u2nKwed8AWfgM4NEybZonhQp829AmYhiRJso+RLFcbJemKcVTp0Qx07IFKedhAdhx1+YE5FTD5yyajRQAwjNy7G4BynZXo80ohTU42EpiLHXkmRsIuz2REzVH5zqvFNXD2jQnxnPcu8ZI9dTED/YCVVOKNSBlDxGyVYB6O6taLZM2L3z+9LN+3qhtw9MMannTFh3E45EHNzaXFz65BerFScys9amzrlmu5LsbVdt0Bot14UwFjavlVbwi21BgGqnJqhtpiflQgR6fL/EaWr0TBHKTai+T4K0flLBy2f3UcqVQchBGruCg92/jeGqCZdMjRx7FNZhAUfys12B7Ves4i+hDZrowDbpyUKbUR6aLo1GHzhIyqhzNt10x+HIlGZNIDkITwwKptXJDKmH/MELt/l5kDsrn7YuZbN+6kDVvDiw5yHHr0N+hSypyq6OUt7YZc9HvWib1WHAbPS0bU7fuUDwGbb/lGRfjrYLzHZwbY8onFyZci++B/PqJrWcpk6fUct2qmddgbCB35b3lGk8m2kzLtAAsZc+nPDyRoQt48uE/zOCf1WVV0OGZxy+V2CG0Orze6oy/OtKUO1f98pc/0yjj+N8ulipb/7luo9/t6G3yPpz4BO6QxgF7QFjd6v1/tHdOmzLSTj+AhlGc4/G0RChmZJEs43dn2qSi/26z6WnMYe7ZTd8uKAnj78B&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <path d="M 40.5 -40.5 L 121.5 40.5 L 40.5 121.5 Z" fill="#2471ff" stroke="#000000" stroke-width="0.1" stroke-miterlimit="10" transform="translate(0,40.5)scale(1,-1)translate(0,-40.5)rotate(-90,81,40.5)" pointer-events="all"/>
+        <rect x="0" y="0" width="162" height="162" fill-opacity="0.13" fill="#000000" stroke="#000000" stroke-opacity="0.13" pointer-events="all" transform="translate(2,3)" opacity="0.25"/>
+        <rect x="0" y="0" width="162" height="162" fill-opacity="0.13" fill="#666666" stroke="#000000" stroke-opacity="0.13" pointer-events="all"/>
+        <path d="M 81 0 L 162 81 L 81 162 Z" fill="#ff0000" stroke="#000000" stroke-miterlimit="10" transform="translate(121.5,0)scale(-1,1)translate(-121.5,0)" pointer-events="all"/>
+        <path d="M 0 0 L 81 81 L 0 162 Z" fill="#ffff00" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 40.5 40.5 L 121.5 121.5 L 40.5 202.5 Z" fill="#008a00" stroke="#000000" stroke-miterlimit="10" transform="translate(0,121.5)scale(1,-1)translate(0,-121.5)rotate(-270,81,121.5)" pointer-events="all"/>
+    </g>
+</svg>
