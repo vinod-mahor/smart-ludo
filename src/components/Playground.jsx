@@ -313,7 +313,7 @@ const Playground = () => {
 
     return (
         <div className='main-container-playground'>
-            <h1 className='gameName'>Smart Ludo</h1>
+            <h1 className='gameName'>Smart-Ludo</h1>
             <div className='ludoBody'>
                 <div className='LudoBox'>
                     <div className="gotiHome skyblue">
