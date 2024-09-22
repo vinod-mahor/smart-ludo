@@ -3,6 +3,8 @@
   --playerColor2: red;
   --playerColor3: green;
   --playerColor4: yellow;
+  --theme-color-white:white;
+  --theme-color-black:black;
 }
 
 * {
@@ -20,14 +22,15 @@ body{
   font-family: Arial, Helvetica, sans-serif;
   color: var(--playerColor3);
   text-align: center;
+  margin: 0 auto;
   margin: 0;
 }
 
 .ludoBody {
-  outline: rgb(0, 0, 0) 1px solid;
+  outline: var(--theme-color-black) 1px solid;
   height: 810px;
   width: 810px;
-  background-color: rgb(255, 255, 255);
+  background-color:var(--theme-color-white);
   box-sizing: border-box;
   margin: auto;
 }
@@ -57,32 +60,32 @@ body{
   position: absolute;
   right: 0;
   top: 0;
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
+  border-left: 1px solid var(--theme-color-black);
+  border-bottom: 1px solid var(--theme-color-black);
 }
 .gotiHome.red {
   background-color: var(--playerColor2);
   position: absolute;
   right: 0%;
   bottom: 0%;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  border-top: 1px solid var(--theme-color-black);
+  border-left: 1px solid var(--theme-color-black);
 }
 .gotiHome.green {
   background-color: var(--playerColor3);
   position: absolute;
   left: 0;
   bottom: 0;
-  border-right: 1px solid black;
-  border-top: 1px solid black;
+  border-right: 1px solid var(--theme-color-black);
+  border-top: 1px solid var(--theme-color-black);
 }
 .gotiHome.yellow {
   background-color: var(--playerColor4);
   position: absolute;
   left: 0;
   top: 0;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-right: 1px solid var(--theme-color-black);
+  border-bottom: 1px solid var(--theme-color-black);
 }
 .common-class-innerhome {
   position: relative;
@@ -93,7 +96,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid black 1px;
+  border: solid var(--theme-color-black) 1px;
 }
 .align-goti-box {
   height: 150px;
@@ -257,21 +260,6 @@ body{
   position: absolute;
   outline: 1px solid black;
 }
-/* .goti-path.skyblue{
-  border-bottom:1px solid black ;
-}
-
-.goti-path.red{
-  border-left:1px solid black;
-}
-.goti-path.green{
-  border-top:1px solid black;
-
-}
-.goti-path.yellow{
-  border-right: 1px solid black;
-} */
-
 .goti-path-channel-1 {
   display: grid;
   /* background-color: rgb(0, 0, 0); */
@@ -339,4 +327,3 @@ body{
   z-index: 5;
   align-content: center;
 }
-

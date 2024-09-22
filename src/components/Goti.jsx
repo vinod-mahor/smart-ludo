@@ -11,7 +11,7 @@ const Goti = ({ color, tokenNum, moveToken }) => {
     useEffect(() => { gotiColorHandler() }, []);
     const tokenPosition = useSelector((state) => state.tokenPosition);
     const lockStatus = useSelector((state) => state.moveTokenController);
-    const [gotiColor, setGotiColor] = useState();
+    const [gotiColor, setGotiColor] = useState(color);
     const [isGotiOnVictoryBox, setIsGotiOnVictoryBox] = useState(false);
     
     // this fuction hadle the color of token

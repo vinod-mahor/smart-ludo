@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    blueDice: [0],
+    blueDice: [6],
     redDice: [0],
     greenDice: [0],
     yellowDice: [0]

@@ -11,110 +11,23 @@ const TokenPositionSlice = createSlice({
     name: "tokenPosition",
     initialState,
     reducers: {
-        takeTokenForword: (state, action) => {
-            const [tokenColor, TokenNum, DiceAction] = action.payload;
-
-            console.log(`this is from take token forword , the tokenColor is : ${tokenColor}, TokenNum:${TokenNum}, DiceNum:${DiceAction}`)
-            switch (tokenColor) {
-                case 'blue':
-                    switch (TokenNum) {
-                        case 1:
-                            state.blueToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 2:
-                            state.blueToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 3:
-                            state.blueToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 4:
-                            state.blueToken[TokenNum - 1] = DiceAction;
-                            break;
-
-
-                    }
-                    break;
-                case 'red':
-                    switch (TokenNum) {
-                        case 1:
-                            state.redToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 2:
-                            state.redToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 3:
-                            state.redToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 4:
-                            state.redToken[TokenNum - 1] = DiceAction;
-                            break;
-
-
-                    }
-                    break;
-                case 'green':
-                    switch (TokenNum) {
-                        case 1:
-                            state.greenToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 2:
-                            state.greenToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 3:
-                            state.greenToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 4:
-                            state.greenToken[TokenNum - 1] = DiceAction;
-                            break;
-
-
-                    }
-                    break;
-                case 'yellow':
-                    switch (TokenNum) {
-                        case 1:
-                            state.yellowToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 2:
-                            state.yellowToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 3:
-                            state.yellowToken[TokenNum - 1] = DiceAction;
-                            break;
-                        case 4:
-                            state.yellowToken[TokenNum - 1] = DiceAction;
-                            break;
-
-
-                    }
-                    break;
-
-
-            }
-
-        },
         releseToken: (state, action) => {
             const [tokenColor, TokenNum, DiceAction] = action.payload;
 
             if ((tokenColor == "blue") && (DiceAction === 6)) {
                 state.blueToken[TokenNum - 1] = 3;
-                // console.log(`the ${tokenColor} has opened!`)
             }
             else if ((tokenColor == "red") && (DiceAction === 6)) {
                 state.redToken[TokenNum - 1] = 16;
-                // console.log(`the ${tokenColor} has opened!`)
             }
             else if ((tokenColor == "green") && (DiceAction === 6)) {
                 state.greenToken[TokenNum - 1] = 29;
-                // console.log(`the ${tokenColor} has opened!`)
             }
             else if ((tokenColor == "yellow") && (DiceAction === 6)) {
                 state.yellowToken[TokenNum - 1] = 42;
-                // console.log(`the ${tokenColor} has opened!`)
             } else {
                 console.error("releseToken fuction has bracked by default!");
             }
-
         },
         runToken: (state, action) => {
             let [tokenColor, tokenNum, DiceAction, currentTokenPosition, homeStatus] = action.payload;
@@ -132,8 +45,6 @@ const TokenPositionSlice = createSlice({
                     } else {
                         console.log("The token is inside of the home");
                     }
-
-
                     break;
                 case "red":
                     if (homeStatus.redToken[tokenNum - 1] === "outside") {
@@ -328,5 +239,5 @@ const TokenPositionSlice = createSlice({
 }
 );
 
-export const { takeTokenForword, releseToken, runToken, runTokenOnVictoryPath, takeTokenOnVictoryPath } = TokenPositionSlice.actions;
+export const { releseToken, runToken, runTokenOnVictoryPath, takeTokenOnVictoryPath } = TokenPositionSlice.actions;
 export default TokenPositionSlice.reducer;

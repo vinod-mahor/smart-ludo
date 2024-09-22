@@ -26,33 +26,41 @@ const Playground = () => {
     useEffect(() => {
         if (!argumentBlue.length == 0) {
             console.log("useEffect called ");
-            const [tokenColor, tokenNum, diceAction] = argumentBlue;
+            const [tokenColor, tokenNum, diceAction, diceSecondLastNumberBlue] = argumentBlue;
             dispatch(takeTokenOnVictoryPath([tokenColor, tokenNum, diceAction, lapState]));
-            dispatch(setUserFinishedTern())
+            if (diceSecondLastNumberBlue !== 6) {
+                dispatch(setUserFinishedTern());
+            }
             console.log("user seted to finished tern")
             setArgumentBlue([])
         }
         else if (!argumentRed.length == 0) {
             console.log("useEffect called ");
-            const [tokenColor, tokenNum, diceAction] = argumentRed;
+            const [tokenColor, tokenNum, diceAction,diceSecondLastNumberRed] = argumentRed;
             dispatch(takeTokenOnVictoryPath([tokenColor, tokenNum, diceAction, lapState]));
-            dispatch(setUserFinishedTern())
+            if (diceSecondLastNumberRed !== 6) {
+                dispatch(setUserFinishedTern());
+            }
             console.log("user seted to finished tern")
             setArgumentRed([])
         }
         else if (!argumentGreen.length == 0) {
             console.log("useEffect called ");
-            const [tokenColor, tokenNum, diceAction] = argumentGreen;
+            const [tokenColor, tokenNum, diceAction, diceSecondLastNumberGreen] = argumentGreen;
             dispatch(takeTokenOnVictoryPath([tokenColor, tokenNum, diceAction, lapState]));
-            dispatch(setUserFinishedTern())
+            if (diceSecondLastNumberGreen !== 6) {
+                dispatch(setUserFinishedTern());
+            }
             console.log("user seted to finished tern")
             setArgumentGreen([])
         }
         else if (!argumentYellow.length == 0) {
             console.log("useEffect called ");
-            const [tokenColor, tokenNum, diceAction] = argumentYellow;
+            const [tokenColor, tokenNum, diceAction,diceSecondLastNumber] = argumentYellow;
             dispatch(takeTokenOnVictoryPath([tokenColor, tokenNum, diceAction, lapState]));
-            dispatch(setUserFinishedTern())
+            if (diceSecondLastNumber !== 6) {
+                dispatch(setUserFinishedTern());
+            }
             console.log("user seted to finished tern")
             setArgumentYellow([])
         }
@@ -102,37 +110,35 @@ const Playground = () => {
                         //hence the token is in victory path
                         console.log("token is on victory path!")
                         dispatch(runTokenOnVictoryPath(["blue", tokenNum, diceLastNumberblue]));
+                        if (diceLastNumberblue !== 6) {
+                            dispatch(setUserFinishedTern())
+                        }
                         dispatch(lockTern("rgb(36,113,255)"));
                     }
                     else {
 
                         if (((curretPositionBlue + diceLastNumberblue) > 52) && (homeStatus.blueToken[tokenNum - 1] === "outside")) {
-                            console.log(curretPositionBlue)
                             if (curretPositionBlue + diceLastNumberblue > 52) {
                                 if ((curretPositionBlue + diceLastNumberblue === 53)) {
-                                    console.log("token is on 53")
                                     setTokenDoneOneLap("blue", tokenNum, "set"); // setting the token has done 1 lap
                                     dispatch(runToken(["blue", tokenNum, diceLastNumberblue, curretPositionBlue, homeStatus]));
                                     if (diceLastNumberblue !== 6) {
                                         dispatch(setUserFinishedTern())
                                     }
-                                    console.log("user seted to finished tern")
                                     dispatch(lockTern("rgb(36,113,255)"));
 
                                 } else {
                                     setTokenDoneOneLap("blue", tokenNum, "set"); // setting the token has done 1 lap
                                     // this state needs arguments tokenColor, tokenNum, diceAction, and lapstate
                                     //  by this state calling the fuction that will push the token in victory path
-                                    setArgumentBlue(["blue", tokenNum, diceLastNumberblue - 1]);
+                                    setArgumentBlue(["blue", tokenNum, diceLastNumberblue - 1, blueDice[blueDice.length - 2]]);
                                     dispatch(setTokenInsideOfVictoryPath(["blue", tokenNum]));
                                     dispatch(lockTern("rgb(36,113,255)"));
                                 }
                             }
                         }
                         else if ((curretPositionBlue === 1) && (lapState.blueToken[tokenNum - 1] === true)) {
-                            console.log("new condition working")
-                            console.log(tokenNum, diceLastNumberblue, lapState)
-                            setArgumentBlue(["blue", tokenNum, diceLastNumberblue, lapState]);
+                            setArgumentBlue(["blue", tokenNum, diceLastNumberblue, lapState, blueDice[blueDice.length - 2]]);
                             dispatch(setTokenInsideOfVictoryPath(["blue", tokenNum]));
                             dispatch(lockTern("rgb(36,113,255)"));
                         }
@@ -172,6 +178,9 @@ const Playground = () => {
                         //hence the token is in victory path
                         console.log("token is on victory path!")
                         dispatch(runTokenOnVictoryPath([tokenColor, tokenNum, diceLastNumberRed]));
+                        if (diceLastNumberRed !== 6) {
+                            dispatch(setUserFinishedTern())
+                        }
                         dispatch(lockTern(tokenColor));
 
                     }
@@ -220,6 +229,9 @@ const Playground = () => {
                         //hence the token is in victory path
                         console.log("token is on victory path!")
                         dispatch(runTokenOnVictoryPath([tokenColor, tokenNum, diceLastNumberGreen]));
+                        if (diceLastNumberGreen !== 6) {
+                            dispatch(setUserFinishedTern())
+                        }
                         dispatch(lockTern(tokenColor));
                     }
                     else {
@@ -271,6 +283,9 @@ const Playground = () => {
                         //hence the token is in victory path
                         console.log("token is on victory path!")
                         dispatch(runTokenOnVictoryPath([tokenColor, tokenNum, diceLastNumberYellow]));
+                        if (diceLastNumberYellow !== 6) {
+                            dispatch(setUserFinishedTern())
+                        }
                         dispatch(lockTern(tokenColor));
                         console.warn(tokenColor)
 
@@ -381,27 +396,15 @@ const Playground = () => {
                     <div className="victroyBox">
                         <div className="miniVictoryBox vertical first">
                             <ShowToken pathBoxId={"yh6"} moveToken={moveToken} />
-                            {/* <ShowToken pathBoxId={"vbb"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vbb"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vbb"} moveToken={moveToken}/> */}
                         </div>
                         <div className="miniVictoryBox horizontal first">
                             <ShowToken pathBoxId={"bh6"} moveToken={moveToken} />
-                            {/* <ShowToken pathBoxId={"vby"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vby"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vby"} moveToken={moveToken}/> */}
                         </div>
                         <div className="miniVictoryBox horizontal second">
                             <ShowToken pathBoxId={"gh6"} moveToken={moveToken} />
-                            {/* <ShowToken pathBoxId={"vbr"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vbr"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vbr"} moveToken={moveToken}/> */}
                         </div>
                         <div className="miniVictoryBox vertical second">
                             <ShowToken pathBoxId={"rh6"} moveToken={moveToken} />
-                            {/* <ShowToken pathBoxId={"vbg"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vbg"} moveToken={moveToken}/>
-                            <ShowToken pathBoxId={"vbg"} moveToken={moveToken}/> */}
                         </div>
                     </div>
                     <div className="goti-path skyblue goti-path-channel-1">

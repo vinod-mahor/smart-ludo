@@ -27,7 +27,6 @@ const TernSlice = createSlice({
                 state.currentPlayerIndex = (state.currentPlayerIndex + 1) % userList.length;
                 // Set the active user based on the updated index
                 state.ActiveUser = userList[state.currentPlayerIndex];
-                console.log(state.ActiveUser);
                 state.isTernFinished = false;
             }
         },

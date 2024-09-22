@@ -7,12 +7,12 @@ import { unLockTern } from '../App/Slices/MoveControllerSlice.js';
 import AvailableTernSlice, { addAvailableTern, removeAvailableTern } from '../App/Slices/AvailableTernSlice.js';
 import './Dice.css';
 import DiceRollingSould from '../audio/diceRollingSoundEffect.mp3'
+import ReadyToRallSound from '../audio/readyToRoll.mp3'
 import { setUserFinishedTern, resetFinishedTern } from '../App/Slices/TernSlice';
 import { setNextUserActive } from '../App/Slices/TernSlice';
 const Dice = (props) => {
     const [random, newRandom] = useState(Math.floor(Math.random() * 6) + 1);
     const [showNum1, setShowNum1] = useState();
-    const [skipTern, setSkipTern] = useState(true);// changed for debugging it will be false
     const [roll, setRoll] = useState('none');
     const [colorDecolor, setColorDecolor] = useState(`${props.props.backgroundColor}`);
     const [isDisabledDice, setIsDisabledDice] = useState(false);
@@ -27,25 +27,50 @@ const Dice = (props) => {
     const givenProps = { ...props.props, backgroundColor: `${colorDecolor}` };
 
     // holding the sould effect and play the sound
-    const playDiceSould = () => {
+    const playDiceSould = (soundName) => {
         const diceSound = new Audio(DiceRollingSould);
-        diceSound.play();
+        const readyToRollSound = new Audio(ReadyToRallSound);
+        switch (soundName) {
+            case "roll":
+                diceSound.play();
+                break;
+            case "readyToRoll":
+                readyToRollSound.play();
+                break;
+
+            default:
+                break;
+        }
+
+
     }
 
     useEffect(() => {
         if (currentTern.isTernFinished) {
-            if (currentTern.isTernSkippe === true) {
+            if (currentTern.isTernSkipped === true) {
                 dispatch(setNextUserActive())
-            } else {
+            } else if (currentTern.isTernSkipped === false) {
                 setTimeout(() => {
-                    console.log("next user active by use effect2")
+                    setTimeout(() => {
+                        playDiceSould("readyToRoll");
+                    }, 50);
                     dispatch(setNextUserActive())
-                },0)
+                }, 0)
             }
-            dispatch(setTernSkippedOrNot(false));
+            else {
+                console.warn("something went wrong!")
+            }
         }
+    }, [currentTern.isTernFinished]);
 
-    }, [currentTern.isTernFinished])
+    useEffect(() => {
+        if (currentTern.isTernSkipped) {
+            setTimeout(() => {
+                dispatch(setUserFinishedTern());
+            }, 2500);
+            dispatch(setTernSkippedOrNot(false))
+        }
+    }, [currentTern.isTernSkipped])
 
     useEffect(() => {
         ColorDecolorDice();
@@ -86,24 +111,22 @@ const Dice = (props) => {
         }
     };
     const canToknMoveConditionCheaker = (allInHomeColor, allInVictoryColor, numberOfOutsideTokensColor, numberOfTokenWonColor) => {
-  
+
         // Condition 1: when the token can't move
         if (((allInHomeColor && random !== 6) || allInVictoryColor)) {
             // because user can't move therfore we set the user has done his move and we  retruning false
-            setTernSkippedOrNot(true);
-            dispatch(setUserFinishedTern());
-            console.log("tern setted to skip")
+            dispatch(setTernSkippedOrNot(true))
             return false;
         }
         // Condition 2: when the token can move
-        else if ((numberOfOutsideTokensColor > 0) && !(numberOfOutsideTokensColor == numberOfTokenWonColor)) {
+        else if ((numberOfOutsideTokensColor > 0) && !(numberOfOutsideTokensColor == numberOfTokenWonColor) || (allInHomeColor && random == 6)) {
             // because user can move therfore we set the user has done his move and  we retruning true
             setTernSkippedOrNot(false);
             dispatch(resetFinishedTern());
             return true
         }
         else {
-            console.log("trying to handle errors!");
+            return null
         }
     }
 
@@ -196,68 +219,60 @@ const Dice = (props) => {
         function allElementAreInside(arr) {  // this fuction will cheack that all the tokens insie of token home
             return arr.every(element => element === "inside");
         }
-        playDiceSould();// Sould played when a user clicks on the dice
+        playDiceSould("roll");// Sould played when a user clicks on the dice
         const randomChal = Math.floor(Math.random() * 6) + 1;
         const { blueDice, redDice, greenDice, yellowDice } = diceState;
         if (currentTern.ActiveUser === "rgb(36,113,255)") {
-            const firstOfLast = blueDice[blueDice.length - 1];
-            const secondOfLast = blueDice[blueDice.length - 2];
+            const firstOfLast = blueDice.at(-1);
+            const secondOfLast = blueDice.at(-2);
             if ((firstOfLast === 6) && (secondOfLast === 6)) {
-                console.log("uncommon dice number");
-                newRandom(Math.floor(Math.random() * 5) + 1)
+                newRandom(Math.floor(Math.random() * 5) + 1);
             } else {
                 // this condition will give player number 6 when he roll the dice more than 12 times and his token still locked and he never got 6 before
                 if (((blueDice.length >= 12) && (blueDice.length <= 14)) && (allElementAreInside(homeStatus.blueToken)) && (!(randomChal == 6)) && (!blueDice.includes(6))) {
                     newRandom(6)
-                    console.log("advantage given");
                 } else {
                     newRandom(randomChal);
                 }
             }
         }
         else if (currentTern.ActiveUser === "red") {
-            const firstOfLast = redDice[redDice.length - 1];
-            const secondOfLast = redDice[redDice.length - 2];
+            const firstOfLast = redDice.at(-1);
+            const secondOfLast = redDice.at(-2);
             if ((firstOfLast === 6) && (secondOfLast === 6)) {
-                console.log("six will not appear");
                 newRandom(Math.floor(Math.random() * 5) + 1)
             } else {
                 // this condition will give player number 6 when he roll the dice more than 12 times and his token still locked and he never got 6 before
                 if (((redDice.length >= 12) && (redDice.length <= 14)) && (allElementAreInside(homeStatus.redToken)) && (!(randomChal == 6)) && (!redDice.includes(6))) {
                     newRandom(6)
-                    console.log("advantage given");
                 } else {
                     newRandom(randomChal);
                 }
             }
         }
         else if (currentTern.ActiveUser === "green") {
-            const firstOfLast = greenDice[greenDice.length - 1];
-            const secondOfLast = greenDice[greenDice.length - 2];
+            const firstOfLast = greenDice.at(-1);
+            const secondOfLast = greenDice.at(-2);
             if ((firstOfLast === 6) && (secondOfLast === 6)) {
-                console.log("uncommon dice number");
                 newRandom(Math.floor(Math.random() * 5) + 1)
             } else {
                 // this condition will give player number 6 when he roll the dice more than 12 times and his token still locked and he never got 6 before
                 if (((greenDice.length >= 12) && (greenDice.length <= 14)) && (allElementAreInside(homeStatus.greenToken)) && (!(randomChal == 6)) && (!greenDice.includes(6))) {
                     newRandom(6)
-                    console.log("advantage given");
                 } else {
                     newRandom(randomChal);
                 }
             }
         }
         else if (currentTern.ActiveUser === "yellow") {
-            const firstOfLast = yellowDice[yellowDice.length - 1];
-            const secondOfLast = yellowDice[yellowDice.length - 2];
+            const firstOfLast = yellowDice.at(-1);
+            const secondOfLast = yellowDice.at(-2);
             if ((firstOfLast === 6) && (secondOfLast === 6)) {
-                console.log("uncommon dice number");
                 newRandom(Math.floor(Math.random() * 5) + 1)
             } else {
                 // this condition will give player number 6 when he roll the dice more than 12 times and his token still locked and he never got 6 before
                 if (((yellowDice.length >= 12) && (yellowDice.length <= 14)) && (allElementAreInside(homeStatus.yellowToken)) && (!(randomChal == 6)) && (!yellowDice.includes(6))) {
                     newRandom(6)
-                    console.log("advantage given");
                 } else {
                     newRandom(randomChal);
                 }
@@ -266,20 +281,22 @@ const Dice = (props) => {
         changeFace();
         const review = await canTokenMove(currentTern, random, tokenPosition, homeStatus, isTokenWon, diceState);
         if (review) {
-            console.log(`review :${review}`)
-            console.log("waiting for user move....")
         } else {
-            console.log(currentTern.isTernSkippe)
-            if (currentTern.isTernSkippe) {
+            if (currentTern.isTernSkipped) {
                 dispatch(setNextUserActive())
-                // dispatch(setTernSkippedOrNot(true))
+                dispatch(setTernSkippedOrNot(false))
+
+            }
+            else if (currentTern.isTernSkipped === false) {
+                if (currentTern.isTernFinished) {
+                    dispatch(setNextUserActive())
+                }
             } else {
-                dispatch(setNextUserActive())
-                dispatch(setTernSkippedOrNot(true))
+                console.warn("something went wrong!")
             }
 
         }
-        // console.log("can token move  :" + review)
+       
         setTimeout(() => {
             setIsDisabledDice(false);
         }, 2500);
