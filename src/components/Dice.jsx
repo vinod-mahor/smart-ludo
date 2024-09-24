@@ -25,7 +25,7 @@ const Dice = (props) => {
     const dispatch = useDispatch();
     const myColor = props.props.backgroundColor;
     const givenProps = { ...props.props, backgroundColor: `${colorDecolor}` };
-
+    const [diceClassName, setDiceClassName] = useState(` ${(myColor ==="rgb(36,113,255)" )?"blue":myColor}`)
     // holding the sould effect and play the sound
     const playDiceSould = (soundName) => {
         const diceSound = new Audio(DiceRollingSould);
@@ -43,39 +43,29 @@ const Dice = (props) => {
                 break;
         }
     }
-
-    useEffect(() => {
-        if (currentTern.isTernFinished) {
-            if (currentTern.isTernSkipped === true) {
-                dispatch(setNextUserActive())
-            } else if (currentTern.isTernSkipped === false) {
-                setTimeout(() => {
-                    setTimeout(() => {
-                        playDiceSould("readyToRoll");
-                    }, 50);
-                    dispatch(setNextUserActive())
-                }, 0)
-            }
-            else {
-                console.warn("something went wrong!")
-            }
-        }
-    }, [currentTern.isTernFinished]);
-
     useEffect(() => {
         if (currentTern.isTernSkipped) {
+            // Handle the skipped turn by marking the turn as finished after 2.5 seconds
             setTimeout(() => {
                 dispatch(setUserFinishedTern());
             }, 2500);
-            dispatch(setTernSkippedOrNot(false))
+            dispatch(setTernSkippedOrNot(false)); // Reset skip status
         }
-    }, [currentTern.isTernSkipped])
+
+        if (currentTern.isTernFinished) {
+            // Handle moving to the next user if the turn is finished
+            setTimeout(() => {
+                dispatch(setNextUserActive());
+            }, 50); // Adjust this delay if needed
+        }
+    }, [currentTern.isTernFinished, currentTern.isTernSkipped]);
 
     useEffect(() => {
         ColorDecolorDice();
         return () => {
             setColorDecolor(myColor)
             dispatch(clearChangeColorInterval());
+            playDiceSould("readyToRoll"); // Optional sound
         };
 
     }, [currentTern.ActiveUser]);
@@ -278,31 +268,20 @@ const Dice = (props) => {
             }
         }
         changeFace();
+
         const review = await canTokenMove(currentTern, random, tokenPosition, homeStatus, isTokenWon, diceState);
-        if (review) {
-        } else {
-            if (currentTern.isTernSkipped) {
-                dispatch(setNextUserActive())
-                dispatch(setTernSkippedOrNot(false))
-
+        if (!review) {
+            if (currentTern.isTernSkipped || currentTern.isTernFinished) {
+                dispatch(setNextUserActive());
             }
-            else if (currentTern.isTernSkipped === false) {
-                if (currentTern.isTernFinished) {
-                    dispatch(setNextUserActive())
-                }
-            } else {
-                console.warn("something went wrong!")
-            }
-
         }
 
-        setTimeout(() => {
-            setIsDisabledDice(false);
-        }, 2500);
+        setTimeout(() => setIsDisabledDice(false), 2500);
     };
 
     return (
-        <div className='dice-container' style={givenProps}>
+        <div className={`dice-container ${diceClassName}`} style={givenProps}>
+            {/* {console.log(givenProps)} */}
             <div className="dice" onClick={((myColor === currentTern.ActiveUser) && (!isDisabledDice)) ? randomDice : null} style={{ transform: `${showNum1}`, animation: `${roll}` }}>
                 <div className="face front"></div>
                 <div className="face back"></div>

@@ -6,17 +6,20 @@
   border: 0;
 }
 
+.main-container-playground{
+  min-height: 100%;
+  min-width: 100%;
+  overflow: hidden;
+}
 .dice-container {
+  margin: 0 25px;
   height: 200px;
   width: 200px;
-  background-color: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
-  /* box-shadow: 0 0 2px rgba(0, 0, 0, -1);
-   */
-   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .dice {
   position: relative;
@@ -123,4 +126,67 @@
 .left::after {
   margin: -35px 0 0 -35px;
   box-shadow: 25px 25px, 50px 50px;
+}
+
+.dice-container.blue {
+  position: absolute;
+  right: 1vw;
+  top: 3em;
+}
+.dice-container.green {
+  position: absolute;
+  left: 1vw;
+  bottom:calc(100vh - 810px);
+}
+.dice-container.red {
+  position: absolute;
+  right: 1vw;
+  bottom:calc(100vh - 810px);
+}
+.dice-container.yellow{
+  position: absolute;
+  left: 1vw;
+  top: 3em;
+}
+
+
+@media screen and (max-width: 776px) {
+/* 
+  .dice-container{
+   height: 150px;
+   width: 150px;
+  }
+  /* .dice{
+    height: 75px;
+    width: 75px;
+    
+  } */
+  /* .front {
+    transform: translateZ(50px);
+    transform: scale(-20px);
+  } */ 
+  /* .dice-container.blue {
+    position: absolute;
+    left: 75vw;
+    top: 85vh;
+    z-index: 11;
+  }
+  .dice-container.green {
+    position: absolute;
+    left: 25vw;
+    top: 100vh;
+    z-index: 11;
+  }
+  .dice-container.red {
+    position: absolute;
+    right: 0;
+    top: 100vh;
+    z-index: 11;
+  }
+  .dice-container.yellow{
+    position: absolute;
+    left: 0;
+    top: 85vh;
+    z-index: 11;
+  } */
 }
