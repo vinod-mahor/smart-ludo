@@ -337,9 +337,8 @@ body{
 /* ---------------------- */
 @media screen and (max-width: 776px) {
   .ludoBody{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    margin: auto;
   }
   .LudoBox {
     width: calc(810px / 2);

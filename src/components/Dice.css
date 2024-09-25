@@ -138,12 +138,12 @@
   }
 
   .dice-container {
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
     justify-content: center;
     width: 100px;
     height: 100px;
-    padding: 40px 0 20px; /* Adjusted padding */
+    /* padding: 40px 0 20px; */
     border-radius: 30px;
     background: #eeeeee;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
