@@ -16,7 +16,7 @@
   border-radius: 30px;
   /* box-shadow: 0 0 2px rgba(0, 0, 0, -1);
    */
-   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .dice {
   position: relative;
@@ -123,4 +123,136 @@
 .left::after {
   margin: -35px 0 0 -35px;
   box-shadow: 25px 25px, 50px 50px;
+}
+
+/* ---------------------- */
+/* MEDIA QURIES */
+/* ---------------------- */
+@media screen and (max-width: 776px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+  }
+
+  .dice-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    padding: 40px 0 20px; /* Adjusted padding */
+    border-radius: 30px;
+    background: #eeeeee;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  .dice {
+    position: relative;
+    width: 60px; /* Smaller size */
+    height: 60px; /* Smaller size */
+    transform-style: preserve-3d;
+    transition: 0.5s linear;
+  }
+
+  @keyframes rolling {
+    50% {
+      transform: rotateX(455deg) rotateY(455deg);
+    }
+  }
+
+  .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* Reduced border-radius */
+    border: 3px solid #f6f3f0; /* Adjusted border width */
+    background: linear-gradient(145deg, #dddbda, #fff);
+    transform: preserve-3d;
+  }
+
+  .face::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background: #f6f3f0;
+    transform: translateZ(-1px);
+    cursor: pointer;
+  }
+
+  .face::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    width: 10px; /* Smaller dot size */
+    height: 10px; /* Smaller dot size */
+    border-radius: 50%;
+    background: #131210;
+    cursor: pointer;
+  }
+
+  .front {
+    transform: translateZ(30px); /* Adjusted translation */
+  }
+
+  .back {
+    transform: rotateX(180deg) translateZ(30px); /* Adjusted translation */
+  }
+
+  .top {
+    transform: rotateX(90deg) translateZ(30px); /* Adjusted translation */
+  }
+
+  .bottom {
+    transform: rotateX(-90deg) translateZ(30px); /* Adjusted translation */
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(30px); /* Adjusted translation */
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateZ(30px); /* Adjusted translation */
+  }
+
+  /* Dot (pip) alignment on dice faces */
+
+  /* Adjusted dots (pips) on dice faces */
+  .front::after {
+    width: 16px;
+    height: 16px;
+    background: #f63330;
+    margin: -8px 0 0 -8px;
+  }
+
+  .back::after {
+    margin: -18px 0 0 -15px;
+    box-shadow: 20px 0, 0 13px, 20px 13px, 0 26px, 20px 26px;
+  }
+
+  .top::after {
+    margin: -15px 0 0 -15px;
+    box-shadow: 20px 20px;
+  }
+
+  .bottom::after {
+    margin: -18px 0 0 -18px;
+    box-shadow: 13px 13px, 26px 26px, 26px 0, 0 26px;
+  }
+
+  .right::after {
+    margin: -15px 0 0 -15px;
+    box-shadow: 20px 0, 0 20px, 20px 20px;
+  }
+
+  .left::after {
+    margin: -18px 0 0 -18px;
+    box-shadow: 13px 13px, 26px 26px;
+  }
 }

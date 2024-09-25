@@ -327,3 +327,116 @@ body{
   z-index: 5;
   align-content: center;
 }
+
+
+
+
+
+/* ---------------------- */
+/* MEDIA QURIES */
+/* ---------------------- */
+@media screen and (max-width: 776px) {
+  .ludoBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .LudoBox {
+    width: calc(810px / 2);
+    height: calc(810px / 2);
+  }
+  .gotiHome {
+    width: calc(324px / 2);
+    height: calc(324px / 2);
+  }
+  .common-class-home{
+    height: calc(54px/2);
+    width: calc(54px/2);
+  }
+  .common-class-innerhome {
+    width: calc(200px / 2);
+    height: calc(200px / 2);
+
+  }
+  .align-goti-box {
+    height: calc(150px / 2);
+    width: calc(150px / 2);
+   
+  }
+
+  .common-class-home.home1,
+  .common-class-home.home2,
+  .common-class-home.home3,
+  .common-class-home.home4 {
+    height: calc(54px / 2);
+    width: calc(54px / 2);
+    margin: 15%;
+  }
+ .goti-img {
+    height: calc(45px / 2);
+    width: calc(45px / 2);
+    cursor: pointer;
+  }
+  .align-goti-box .common-class-home.home1 {
+    position: absolute;
+    top:-15%;
+    left: -13%;
+  }
+  .align-goti-box .common-class-home.home2 {
+    position: absolute;
+    top: -13%;
+    right: -13%;
+  }
+  .align-goti-box .common-class-home.home3 {
+    position: absolute;
+    bottom:-13%;
+    right:-13%;
+  }
+  .align-goti-box .common-class-home.home4 {
+    position: absolute;
+    bottom:-13%;
+    left:-13%;
+  }
+  .path-box {
+    width: calc(54px / 2);
+    height: calc(54px / 2);
+  }
+  .goti-path.goti-path-channel-1 {
+    grid-template-columns: repeat(3, calc(54px / 2));
+    grid-template-rows: repeat(6, 1fr);
+  }
+  .goti-path.goti-path-channel-2 {
+    grid-template-rows: repeat(3, calc(54px / 2));
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .goti-path.yellow {
+    top: 162px;
+    left: 0;
+    max-width: 162px;
+  }
+  .goti-path.red {
+    top: 162px;
+    right: 0;
+    max-width: 162px;
+  }
+  .goti-path.skyblue {
+    top: 0;
+    left: 162px;
+    max-height: 162px;
+  }
+  .goti-path.green {
+    bottom: 1px;
+    left: 162px;
+    max-height: 162px;
+  }
+  .victroyBox{
+    max-height: calc(164px/2);
+    max-width: calc(162px/2);
+    object-fit: cover;
+    position: absolute;
+    top:163px;
+    left: 163px;
+    overflow: hidden;
+  }
+  
+}
