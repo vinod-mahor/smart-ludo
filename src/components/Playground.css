@@ -103,6 +103,11 @@ body{
   width: 150px;
   position: relative;
 }
+.goti-img{
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
 .align-goti-box .common-class-home.home1 {
   position: absolute;
   top: 0;

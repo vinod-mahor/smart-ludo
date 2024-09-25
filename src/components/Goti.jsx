@@ -83,7 +83,7 @@ const Goti = ({ color, tokenNum, moveToken }) => {
     }
     return (
         <>
-            <img src={gotiColor} alt="  " onClick={handleLock} style={{ height: "45px", width: "45px", cursor: "pointer" }} />
+            <img src={gotiColor} className='goti-img' alt="" onClick={handleLock}  />
         </>
 
     )
