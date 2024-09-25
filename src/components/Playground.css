@@ -173,19 +173,21 @@ body{
 }
 
 .victroyBox {
-  outline: 1px solid black;
   height: 162px;
   width: 162px;
   position: absolute;
-  left: 324px;
-  top: 324px;
+  /* outline: 1px solid black; */
+  left: 325px;
+  top: 326px;
   z-index: 8;
   margin: 0;
   display: block;
-  z-index: 26;
+  z-index: 10;
   background-image: url(../svg/victoryBox.svg);
-  object-fit: contain;
+  background-size: cover;
+  object-fit:contain;
 }
+
 
 .miniVictoryBox{
   /* background-color: rgb(245, 105, 12); */
@@ -342,8 +344,11 @@ body{
 /* ---------------------- */
 @media screen and (max-width: 776px) {
   .ludoBody{
-    display: grid;
-    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100vh;
+    min-height: 1vh;
   }
   .LudoBox {
     width: calc(810px / 2);
