@@ -13,7 +13,7 @@ const Goti = ({ color, tokenNum, moveToken }) => {
     const lockStatus = useSelector((state) => state.moveTokenController);
     const [gotiColor, setGotiColor] = useState(color);
     const [isGotiOnVictoryBox, setIsGotiOnVictoryBox] = useState(false);
-    
+
     // this fuction hadle the color of token
     const gotiColorHandler = () => {
         if (color === "rgb(36,113,255)") {
@@ -83,7 +83,7 @@ const Goti = ({ color, tokenNum, moveToken }) => {
     }
     return (
         <>
-            <img src={gotiColor} className='goti-img' alt="" onClick={handleLock}  />
+            <img src={gotiColor} className='goti-img' alt="" onClick={handleLock} />
         </>
 
     )

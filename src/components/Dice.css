@@ -18,6 +18,26 @@
    */
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+.dice-container.blue{
+  position: absolute;
+  right: 10vh;
+  top:10vh;
+}
+.dice-container.red{
+  position: absolute;
+  right: 10vh;
+  bottom:10vh;
+}
+.dice-container.green{
+  position: absolute;
+  left: 10vh;
+  bottom:10vh;
+}
+.dice-container.yellow{
+  position: absolute;
+  left: 10vh;
+  top:10vh;
+}
 .dice {
   position: relative;
   width: 100px;
@@ -125,6 +145,9 @@
   box-shadow: 25px 25px, 50px 50px;
 }
 
+
+
+
 /* ---------------------- */
 /* MEDIA QURIES */
 /* ---------------------- */
@@ -136,7 +159,25 @@
     outline: 0;
     border: 0;
   }
-
+  body{
+    min-width: 1vw;
+    min-height: 1vh;
+    background-color: aquamarine;
+  }
+  .ludoBody{
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: normal;
+  }
+  .LudoBox{
+    position: absolute;
+    margin:10vh auto;
+  
+  }
   .dice-container {
     display: grid;
     place-items: center;
@@ -150,6 +191,26 @@
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 
+  .dice-container.blue{
+    position: absolute;
+    right: 5vh;
+    top:5vh;
+  }
+  .dice-container.red{
+    position: absolute;
+    right: 5vh;
+    bottom:5vh
+  }
+  .dice-container.green{
+    position: absolute;
+    left: 5vh;
+    bottom:5vh
+  }
+  .dice-container.yellow{
+    position: absolute;
+    left: 5vh;
+    top:5vh
+  }
   .dice {
     position: relative;
     width: 60px; /* Smaller size */
