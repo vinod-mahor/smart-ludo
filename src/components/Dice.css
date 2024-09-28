@@ -184,7 +184,6 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    /* padding: 40px 0 20px; */
     border-radius: 30px;
     background: #eeeeee;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -315,5 +314,23 @@
   .left::after {
     margin: -18px 0 0 -18px;
     box-shadow: 13px 13px, 26px 26px;
+  }
+  
+}
+
+@media only screen and (max-width: 600px){
+  body{
+    background-color: crimson;
+    max-height: 50vh;
+  }
+  .ludoBody{
+    max-height: 100vh;
+    overflow: hidden;
+  }
+  .LudoBox{
+    position: absolute;
+    left:0%;
+    top:50%;
+    transform: translateY(-75%);
   }
 }
