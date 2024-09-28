@@ -102,6 +102,31 @@ body {
   width: 150px;
   position: relative;
 }
+.goti-img{
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
+.align-goti-box .common-class-home.home1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.align-goti-box .common-class-home.home2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.align-goti-box .common-class-home.home3 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.align-goti-box .common-class-home.home4 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 .common-class-home {
   display: flex;
   justify-content: center;
@@ -187,7 +212,8 @@ body {
   object-fit:contain;
 }
 
-.miniVictoryBox {
+
+.miniVictoryBox{
   /* background-color: rgb(245, 105, 12); */
   z-index: 200;
   display: flex;
@@ -364,8 +390,10 @@ body {
 @media screen and (max-width: 776px) {
   .ludoBody{
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    max-width: 100vh;
+    min-height: 1vh;
   }
   .LudoBox {
     width: calc(810px / 2);

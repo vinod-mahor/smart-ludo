@@ -16,6 +16,7 @@ const Dice = (props) => {
     const [roll, setRoll] = useState('none');
     const [colorDecolor, setColorDecolor] = useState(`${props.props.backgroundColor}`);
     const [isDisabledDice, setIsDisabledDice] = useState(false);
+    const [diceClass, setDiceClass] = useState(props.props.backgroundColor == "rgb(36,113,255)" ? "blue" : props.props.backgroundColor)
     const currentTern = useSelector((state) => state.ternHandler);
     const diceState = useSelector((state) => state.diceNumber);
     const availableChance = useSelector((state) => state.availableTern);
@@ -42,7 +43,10 @@ const Dice = (props) => {
             default:
                 break;
         }
+
+
     }
+
     useEffect(() => {
         if (currentTern.isTernSkipped) {
             // Handle the skipped turn by marking the turn as finished after 2.5 seconds
@@ -51,7 +55,7 @@ const Dice = (props) => {
             }, 2500);
             dispatch(setTernSkippedOrNot(false)); // Reset skip status
         }
-
+    
         if (currentTern.isTernFinished) {
             // Handle moving to the next user if the turn is finished
             setTimeout(() => {
@@ -59,6 +63,7 @@ const Dice = (props) => {
             }, 50); // Adjust this delay if needed
         }
     }, [currentTern.isTernFinished, currentTern.isTernSkipped]);
+    
 
     useEffect(() => {
         ColorDecolorDice();
@@ -270,18 +275,30 @@ const Dice = (props) => {
         changeFace();
 
         const review = await canTokenMove(currentTern, random, tokenPosition, homeStatus, isTokenWon, diceState);
-        if (!review) {
-            if (currentTern.isTernSkipped || currentTern.isTernFinished) {
-                dispatch(setNextUserActive());
+        if (review) {
+        } else {
+            if (currentTern.isTernSkipped) {
+                dispatch(setNextUserActive())
+                dispatch(setTernSkippedOrNot(false))
+
             }
+            else if (currentTern.isTernSkipped === false) {
+                if (currentTern.isTernFinished) {
+                    dispatch(setNextUserActive())
+                }
+            } else {
+                console.warn("something went wrong!")
+            }
+
         }
 
-        setTimeout(() => setIsDisabledDice(false), 2500);
+        setTimeout(() => {
+            setIsDisabledDice(false);
+        }, 2500);
     };
 
     return (
-        <div className={`dice-container ${diceClassName}`} style={givenProps}>
-            {/* {console.log(givenProps)} */}
+        <div className={`dice-container ${diceClass}`} style={givenProps}>
             <div className="dice" onClick={((myColor === currentTern.ActiveUser) && (!isDisabledDice)) ? randomDice : null} style={{ transform: `${showNum1}`, animation: `${roll}` }}>
                 <div className="face front"></div>
                 <div className="face back"></div>

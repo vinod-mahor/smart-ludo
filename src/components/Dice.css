@@ -20,7 +20,26 @@
   justify-content: center;
   border-radius: 30px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
+}
+.dice-container.blue{
+  position: absolute;
+  right: 10vh;
+  top:10vh;
+}
+.dice-container.red{
+  position: absolute;
+  right: 10vh;
+  bottom:10vh;
+}
+.dice-container.green{
+  position: absolute;
+  left: 10vh;
+  bottom:10vh;
+}
+.dice-container.yellow{
+  position: absolute;
+  left: 10vh;
+  top:10vh;
 }
 .dice {
   position: relative;
@@ -129,26 +148,6 @@
   box-shadow: 25px 25px, 50px 50px;
 }
 
-.dice-container.blue {
-  position: absolute;
-  right: 1vw;
-  top: 3em;
-}
-.dice-container.green {
-  position: absolute;
-  left: 1vw;
-  bottom:calc(100vh - 810px);
-}
-.dice-container.red {
-  position: absolute;
-  right: 1vw;
-  bottom:calc(100vh - 810px);
-}
-.dice-container.yellow{
-  position: absolute;
-  left: 1vw;
-  top: 3em;
-}
 
 
 
@@ -163,20 +162,57 @@
     outline: 0;
     border: 0;
   }
-
-  .dice-container {
+  body{
+    min-width: 1vw;
+    min-height: 1vh;
+    background-color: aquamarine;
+  }
+  .ludoBody{
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: auto 0;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    align-items: normal;
+  }
+  .LudoBox{
+    position: absolute;
+    margin:10vh auto;
+  
+  }
+  .dice-container {
+    display: grid;
+    place-items: center;
     justify-content: center;
     width: 100px;
     height: 100px;
-    padding: 40px 0 20px; /* Adjusted padding */
     border-radius: 30px;
     background: #eeeeee;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 
+  .dice-container.blue{
+    position: absolute;
+    right: 5vh;
+    top:5vh;
+  }
+  .dice-container.red{
+    position: absolute;
+    right: 5vh;
+    bottom:5vh
+  }
+  .dice-container.green{
+    position: absolute;
+    left: 5vh;
+    bottom:5vh
+  }
+  .dice-container.yellow{
+    position: absolute;
+    left: 5vh;
+    top:5vh
+  }
   .dice {
     position: relative;
     width: 60px; /* Smaller size */
@@ -281,5 +317,23 @@
   .left::after {
     margin: -18px 0 0 -18px;
     box-shadow: 13px 13px, 26px 26px;
+  }
+  
+}
+
+@media only screen and (max-width: 600px){
+  body{
+    background-color: crimson;
+    max-height: 50vh;
+  }
+  .ludoBody{
+    max-height: 100vh;
+    overflow: hidden;
+  }
+  .LudoBox{
+    position: absolute;
+    left:0%;
+    top:50%;
+    transform: translateY(-75%);
   }
 }
