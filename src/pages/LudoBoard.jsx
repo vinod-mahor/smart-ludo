@@ -8,10 +8,10 @@ const LudoBoard = () => {
         if (window.innerWidth < 774) {
 
             setDiceForMobile({
-                dice1: {position:"absolute", backgroundColor: "yellow", height: "100px", width: "100px" },
-                dice2: {position:"absolute", backgroundColor: "green", height: "100px", width: "100px" },
-                dice3: {position:"absolute", backgroundColor: "red", height: "100px", width: "100px" },
-                dice4: {position:"absolute", backgroundColor: "rgb(36,113,255)", height: "100px", width: "100px" }
+                dice1: {position:"absolute", backgroundColor: "yellow" },
+                dice2: {position:"absolute", backgroundColor: "green" },
+                dice3: {position:"absolute", backgroundColor: "red" },
+                dice4: {position:"absolute", backgroundColor: "rgb(36,113,255)" }
             })
         }
     }, [])

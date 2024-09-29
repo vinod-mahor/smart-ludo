@@ -18,25 +18,25 @@
    */
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.dice-container.blue{
+.dice-container.blue {
   position: absolute;
   right: 10vh;
-  top:10vh;
+  top: 10vh;
 }
-.dice-container.red{
+.dice-container.red {
   position: absolute;
   right: 10vh;
-  bottom:10vh;
+  bottom: 10vh;
 }
-.dice-container.green{
+.dice-container.green {
   position: absolute;
   left: 10vh;
-  bottom:10vh;
+  bottom: 10vh;
 }
-.dice-container.yellow{
+.dice-container.yellow {
   position: absolute;
   left: 10vh;
-  top:10vh;
+  top: 10vh;
 }
 .dice {
   position: relative;
@@ -144,14 +144,11 @@
   margin: -35px 0 0 -35px;
   box-shadow: 25px 25px, 50px 50px;
 }
-
-
-
-
+/* ================================================================================================================================ */
 /* ---------------------- */
 /* MEDIA QURIES */
 /* ---------------------- */
-@media screen and (max-width: 776px) {
+@media only screen and (max-width: 776px) {
   * {
     margin: 0;
     padding: 0;
@@ -159,12 +156,12 @@
     outline: 0;
     border: 0;
   }
-  body{
+  body {
     min-width: 1vw;
     min-height: 1vh;
     background-color: aquamarine;
   }
-  .ludoBody{
+  .ludoBody {
     min-width: 100%;
     min-height: 100%;
     padding: 0;
@@ -173,10 +170,9 @@
     justify-content: center;
     align-items: normal;
   }
-  .LudoBox{
+  .LudoBox {
     position: absolute;
-    margin:10vh auto;
-  
+    margin: 10vh auto;
   }
   .dice-container {
     display: grid;
@@ -190,25 +186,25 @@
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 
-  .dice-container.blue{
+  .dice-container.blue {
     position: absolute;
     right: 5vh;
-    top:5vh;
+    top: 5vh;
   }
-  .dice-container.red{
+  .dice-container.red {
     position: absolute;
     right: 5vh;
-    bottom:5vh
+    bottom: 5vh;
   }
-  .dice-container.green{
+  .dice-container.green {
     position: absolute;
     left: 5vh;
-    bottom:5vh
+    bottom: 5vh;
   }
-  .dice-container.yellow{
+  .dice-container.yellow {
     position: absolute;
     left: 5vh;
-    top:5vh
+    top: 5vh;
   }
   .dice {
     position: relative;
@@ -315,22 +311,83 @@
     margin: -18px 0 0 -18px;
     box-shadow: 13px 13px, 26px 26px;
   }
-  
 }
+/* =============================================================================================================== */
+@media only screen and (max-width: 600px) {
+  .dice-container{
+    height: 80px;
+    width: 80px;
+    padding: 12px 0 12px; 
+  }
+  .dice {
+    width: 40px; /* Smaller size */
+    height: 40px; /* Smaller size */
+  }
 
-@media only screen and (max-width: 600px){
-  body{
-    background-color: crimson;
-    max-height: 50vh;
+  .face {
+    border-radius: 8px; /* Reduced border-radius */
+    border: 2px solid #f6f3f0; /* Adjusted border width */
   }
-  .ludoBody{
-    max-height: 100vh;
-    overflow: hidden;
+  .face::after {
+    width: 6px; /* Smaller dot size */
+    height: 6px; /* Smaller dot size */
+    margin: -3px 0 0 -3px;
   }
-  .LudoBox{
-    position: absolute;
-    left:0%;
-    top:50%;
-    transform: translateY(-75%);
+
+  /* Back (6 dots) */
+  .back::after {
+    margin: -12px 0 0 -12px;
+    /* box-shadow: 10px 0, 0 10px, 10px 10px, 0 20px, 10px 20px, 20px 10px; */
+    box-shadow: 18px 0, 0 10px, 18px 10px, 0 20px, 18px 20px;
+  }
+
+  /* Top (4 dots) */
+  .top::after {
+    margin: -12px 0 0 -12px;
+    box-shadow: 18px 18px;
+  }
+
+  /* Bottom (5 dots) */
+  .bottom::after {
+    /* margin: -36px 0 0 -36px;
+    box-shadow: 26px 26px, 52px 52px, 52px 0, 0 52px; */
+    margin: -12px 0 0 -12px;
+    box-shadow: 10px 10px, 20px 20px, 20px 0px, 0 20px;
+  }
+
+  /* Right (3 dots) */
+  .right::after {
+    margin: -10px 0 0 -10px;
+    box-shadow: 15px 0, 0 15px, 15px 15px;
+  }
+
+  /* Left (2 dots) */
+  .left::after {
+    margin: -12px 0 0 -12px;
+    box-shadow: 10px 10px, 20px 20px;
+  }
+
+  .front {
+    transform: translateZ(20px);
+  }
+
+  .back {
+    transform: rotateX(180deg) translateZ(20px);
+  }
+
+  .top {
+    transform: rotateX(90deg) translateZ(20px);
+  }
+
+  .bottom {
+    transform: rotateX(-90deg) translateZ(20px);
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(20px);
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateZ(20px);
   }
 }
