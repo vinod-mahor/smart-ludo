@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import Playground from '../components/Playground.jsx'
 import Dice from '../components/Dice.jsx'
 const LudoBoard = () => {
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (window.innerWidth < 374) {
+        if (window.innerWidth < 374) {
 
             setDiceForMobile({
                 dice1: {position:"absolute", backgroundColor: "yellow" },
