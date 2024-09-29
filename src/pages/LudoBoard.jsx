@@ -7,14 +7,14 @@ const LudoBoard = () => {
 
     //     if (window.innerWidth < 374) {
 
-    //         setDiceForMobile({
-    //             dice1: { position: "absolute", top: "810px", left: '100px', backgroundColor: "yellow", height: "100px", width: "100px" },
-    //             dice2: { position: "absolute", top: "810px", left: '200px', backgroundColor: "green", height: "100px", width: "100px" },
-    //             dice3: { position: "absolute", top: "810px", left: '300px', backgroundColor: "red", height: "100px", width: "100px" },
-    //             dice4: { position: "absolute", top: "810px", left: '400px', backgroundColor: "rgb(36,113,255)", height: "100px", width: "100px" }
-    //         })
-    //     }
-    // }, [])
+            setDiceForMobile({
+                dice1: {position:"absolute", backgroundColor: "yellow" },
+                dice2: {position:"absolute", backgroundColor: "green" },
+                dice3: {position:"absolute", backgroundColor: "red" },
+                dice4: {position:"absolute", backgroundColor: "rgb(36,113,255)" }
+            })
+        }
+    }, [])
     const [diceForMobile, setDiceForMobile] = useState({
         dice1: { backgroundColor: "yellow" },
         dice2: { backgroundColor: "green" },
