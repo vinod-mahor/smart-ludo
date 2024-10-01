@@ -176,7 +176,6 @@ body {
   height: 162px;
   width: 162px;
   position: absolute;
-  /* outline: 1px solid black; */
   left: 325px;
   top: 326px;
   z-index: 8;
@@ -189,7 +188,6 @@ body {
 }
 
 .miniVictoryBox {
-  /* background-color: rgb(245, 105, 12); */
   z-index: 200;
   display: flex;
   align-items: center;
@@ -198,15 +196,12 @@ body {
 .miniVictoryBox.horizontal {
   width: 100%;
   height: 40%;
-  /* border: 1px solid black; */
   position: absolute;
 }
 .miniVictoryBox.vertical {
   width: 40%;
   height: 100%;
   position: absolute;
-  /* border: 1px solid black; */
-  /* background-color: rgb(245, 105, 12); */
 }
 .miniVictoryBox.vertical.first {
   left: 0;
@@ -470,94 +465,99 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full height to center vertically */
-    width: 100vw; /* Full width to center horizontally */
+    height: 100vh;
+    width: 100vw;
   }
   .LudoBox {
-    width: calc(810px / 4);
-    height: calc(810px / 4);
+    width: calc(810px / 3);
+    height: calc(810px / 3);
     margin: 20vh auto !important;
+    border: 1px solid black;
   }
 
   .gotiHome {
-    height: calc(324px / 4);
-    width: calc(324px / 4);
-    /* display: none; */
+    height: calc(324px / 3);
+    width: calc(324px / 3);
   }
   .align-goti-box {
-    height: calc(150px / 4);
-    width: calc(150px / 4);
+    height: calc(150px / 3);
+    width: calc(150px / 3);
   }
   .common-class-home.home1,
   .common-class-home.home2,
   .common-class-home.home3,
   .common-class-home.home4 {
-    height: calc(54px / 4);
-    width: calc(54px / 4);
+    height: calc(54px / 3);
+    width: calc(54px / 3);
   }
   .common-class-innerhome {
     position: relative;
-    height: calc(200px / 4);
-    width: calc(200px / 4);
-    border: solid var(--theme-color-black) 1px;
+    height: calc(200px / 3);
+    width: calc(200px / 3);
+    /* border: solid var(--theme-color-black) 1px; */
   }
   .goti-path.goti-path-channel-1 {
     height: calc(325px / 4);
-    grid-template-columns: repeat(3, calc(54px / 4));
-    grid-template-rows: repeat(6, calc(54px / 4));
+    grid-template-columns: repeat(3, calc(54px / 3));
+    grid-template-rows: repeat(6, calc(54px / 3));
   }
   .goti-path.goti-path-channel-2 {
-    grid-template-rows: repeat(3, calc(54px / 4));
-    grid-template-columns: repeat(6, calc(54px / 4));
-    width: calc(325px / 4);
+    grid-template-rows: repeat(3, calc(54px / 3));
+    grid-template-columns: repeat(6, calc(54px / 3));
+    width: calc(325px / 3);
   }
   .goti-img {
-    height: calc(45px / 4);
-    width: calc(45px / 4);
+    height: calc(45px / 3);
+    width: calc(45px / 3);
   }
   .goti-path.yellow {
-    top: calc(162px / 4);
+    top: calc(162px / 3);
     left: 0;
-    max-width: calc(162px / 4);
+    max-width: calc(162px / 3);
   }
   .goti-path.red {
-    top: calc(162px / 4);
+    top: calc(162px / 3);
     right: 0;
-    max-width: calc(162px / 4);
+    max-width: calc(162px / 3);
   }
   .goti-path.skyblue {
     top: 0;
-    left: calc(162px / 4);
-    max-height: calc(162px / 4);
+    left: calc(162px / 3);
+    max-height: calc(162px / 3);
   }
   .goti-path.green {
     bottom: 1px;
-    left: calc(162px / 2);
-    max-height: calc(162px / 2);
+    left: calc(324px / 3);
+    max-height: calc(324px / 3);
   }
   .path-box {
-    width: calc(54px / 4);
-    height: calc(54px / 4);
+    width: calc(54px / 3);
+    height: calc(54px / 3);
   }
   .goti-path.yellow {
-    top: calc(162px / 2);
+    top: calc(324px / 3);
     left: 0;
-    max-width: calc(162px / 2);
+    max-width: calc(324px / 3);
+  }
+  .goti-path {
+    outline: none;
   }
   .goti-path.red {
-    top: calc(162px / 2);
+    top: calc(324px / 3);
     right: 0;
-    max-width: calc(162px / 2);
+    max-width: calc(324px / 3);
   }
   .goti-path.skyblue {
     top: 0;
-    left: calc(162px / 2);
-    max-height: calc(162px / 2);
+    left: calc(324px / 3);
+    max-height: calc(324px / 3);
+    max-width: calc(324px / 6);
   }
   .goti-path.green {
     bottom: 1px;
-    left: calc(162px / 2);
-    max-height: calc(162px / 2);
+    left: calc(324px / 3);
+    top: calc((100% - 108px ));
+    max-height: calc(324px / 3);
   }
   .cheera {
     /* background-size: 75%; */
@@ -565,12 +565,12 @@ body {
     align-content: center;
   }
   .victroyBox {
-    max-height: calc(164px / 4);
-    max-width: calc(164px / 4);
+    max-height: calc(164px / 3);
+    max-width: calc(164px / 3);
     object-fit: cover;
     position: absolute;
-    top: 81px;
-    left: 81px;
+    top: 108px;
+    left: 108px;
     overflow: hidden;
   }
 }

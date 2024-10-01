@@ -318,6 +318,7 @@
     height: 80px;
     width: 80px;
     padding: 12px 0 12px; 
+    border-radius: 10px;
   }
   .dice {
     width: 40px; /* Smaller size */
