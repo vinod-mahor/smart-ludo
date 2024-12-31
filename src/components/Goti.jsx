@@ -6,10 +6,11 @@ import greenGoti from '../Img/greenGoti.png';
 import yellowGoti from '../Img/yellowGoti.png';
 import { setTokenWon } from '../App/Slices/isTokenWonSlice';
 import { useDispatch } from 'react-redux';
+
 const Goti = ({ color, tokenNum, moveToken }) => {
-    const dispatch = useDispatch();
-    useEffect(() => { gotiColorHandler() }, []);
     const tokenPosition = useSelector((state) => state.tokenPosition);
+    const dispatch = useDispatch();
+    useEffect(() => { gotiColorHandler() }, [tokenPosition]);
     const lockStatus = useSelector((state) => state.moveTokenController);
     const [gotiColor, setGotiColor] = useState(color);
     const [isGotiOnVictoryBox, setIsGotiOnVictoryBox] = useState(false);

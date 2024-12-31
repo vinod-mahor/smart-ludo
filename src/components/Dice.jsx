@@ -8,8 +8,31 @@ import AvailableTernSlice, { addAvailableTern, removeAvailableTern } from '../Ap
 import './Dice.css';
 import DiceRollingSould from '../audio/diceRollingSoundEffect.mp3'
 import ReadyToRallSound from '../audio/readyToRoll.mp3'
+import killSoundEffect from '../audio/surprise-sound-effect-99300.mp3'
 import { setUserFinishedTern, resetFinishedTern } from '../App/Slices/TernSlice';
 import { setNextUserActive } from '../App/Slices/TernSlice';
+
+ // holding the sould effect and play the sound
+ const playDiceSould = (soundName) => {
+    const diceSound = new Audio(DiceRollingSould);
+    const readyToRollSound = new Audio(ReadyToRallSound);
+    const killSoundEffectName = new Audio(killSoundEffect);
+    switch (soundName) {
+        case "roll":
+            diceSound.play();
+            break;
+        case "readyToRoll":
+            readyToRollSound.play();
+            break;
+        case "kill":
+            killSoundEffectName.play();
+            killSoundEffectName.volume = 1;
+        default:
+            break;
+    }
+
+
+}
 const Dice = (props) => {
     const [random, newRandom] = useState(Math.floor(Math.random() * 6) + 1);
     const [showNum1, setShowNum1] = useState();
@@ -27,24 +50,7 @@ const Dice = (props) => {
     const myColor = props.props.backgroundColor;
     const givenProps = { ...props.props, backgroundColor: `${colorDecolor}` };
 
-    // holding the sould effect and play the sound
-    const playDiceSould = (soundName) => {
-        const diceSound = new Audio(DiceRollingSould);
-        const readyToRollSound = new Audio(ReadyToRallSound);
-        switch (soundName) {
-            case "roll":
-                diceSound.play();
-                break;
-            case "readyToRoll":
-                readyToRollSound.play();
-                break;
-
-            default:
-                break;
-        }
-
-
-    }
+   
 
     useEffect(() => {
         if (currentTern.isTernSkipped) {
@@ -310,3 +316,4 @@ const Dice = (props) => {
 };
 
 export default Dice;
+export {playDiceSould}

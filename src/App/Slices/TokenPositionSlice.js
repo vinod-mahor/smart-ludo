@@ -232,6 +232,28 @@ const TokenPositionSlice = createSlice({
                     console.error("takeTokenOnVictoryPath fuction has bracked by default!");
                     break;
             }
+        },
+        eliminateToken: (state, action) => {
+            console.log("eleminate token function calleed");
+            console.log(action.payload)
+            const [tokenColor, tokenNum] = action.payload;
+            console.log(tokenColor,tokenNum)
+            switch (tokenColor) {
+                case "blue":
+                    state.blueToken[tokenNum - 1] = `b${tokenNum}`
+                    break;
+                case "red":
+                    state.redToken[tokenNum - 1] = `r${tokenNum}`
+                    break;
+                case "green":
+                    state.greenToken[tokenNum - 1] = `g${tokenNum}`
+                    break;
+                case "yellow":
+                    state.yellowToken[tokenNum - 1] = `y${tokenNum}`
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -239,5 +261,5 @@ const TokenPositionSlice = createSlice({
 }
 );
 
-export const { releseToken, runToken, runTokenOnVictoryPath, takeTokenOnVictoryPath } = TokenPositionSlice.actions;
+export const { releseToken, runToken, runTokenOnVictoryPath, takeTokenOnVictoryPath, eliminateToken } = TokenPositionSlice.actions;
 export default TokenPositionSlice.reducer;

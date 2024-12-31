@@ -31,6 +31,8 @@ const HomeStatusSlice = createSlice({
         },
         takeInOneToken: (state, action) => {
             const [tokenColor, tokenNum] = action.payload;
+            // const propertyName = tokenColor + "Token";
+            // state[propertyName][tokenNum - 1];
             if (tokenColor === "blue") {
                 state.blueToken[tokenNum - 1] = "inside";
             }
