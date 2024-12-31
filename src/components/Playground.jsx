@@ -3,12 +3,14 @@ import './Playground.css'
 import ShowToken from './ShowToken'
 import { useSelector, useDispatch } from 'react-redux'
 import { setUserFinishedTern, setTernSkippedOrNot } from '../App/Slices/TernSlice'
-import { releseToken, runToken, runTokenOnVictoryPath, takeTokenOnVictoryPath } from '../App/Slices/TokenPositionSlice';
+import { releseToken, runToken, runTokenOnVictoryPath, takeTokenOnVictoryPath, eliminateToken } from '../App/Slices/TokenPositionSlice';
 import { lockTern } from '../App/Slices/MoveControllerSlice';
-import { takeOutOneToken } from '../App/Slices/HomeStatusSlice';
+import { takeOutOneToken, takeInOneToken } from '../App/Slices/HomeStatusSlice';
 import { setTokenInsideOfVictoryPath, setTokenOutsideOfVictoryPath } from '../App/Slices/isTokenOnVictoryPathSlice'
 import { setLap, removeLap } from '../App/Slices/LapSlice';
-// import { canTokenMove } from './Dice'
+import { playDiceSould } from './Dice.jsx'
+
+
 const Playground = () => {
 
     const Tern = useSelector((state) => state.ternHandler);
@@ -22,7 +24,7 @@ const Playground = () => {
     const homeStatus = useSelector((state) => state.HomeStatus);
     const isTokenInVictoryBox = useSelector((state) => state.isTokenOnVictoryPath);
     const lapState = useSelector(state => state.lapSlice);
-    // console.log(Tern)
+
     useEffect(() => {
         if (!argumentBlue.length == 0) {
             console.log("useEffect called ");
@@ -36,7 +38,7 @@ const Playground = () => {
         }
         else if (!argumentRed.length == 0) {
             console.log("useEffect called ");
-            const [tokenColor, tokenNum, diceAction,diceSecondLastNumberRed] = argumentRed;
+            const [tokenColor, tokenNum, diceAction, diceSecondLastNumberRed] = argumentRed;
             dispatch(takeTokenOnVictoryPath([tokenColor, tokenNum, diceAction, lapState]));
             if (diceSecondLastNumberRed !== 6) {
                 dispatch(setUserFinishedTern());
@@ -56,7 +58,7 @@ const Playground = () => {
         }
         else if (!argumentYellow.length == 0) {
             console.log("useEffect called ");
-            const [tokenColor, tokenNum, diceAction,diceSecondLastNumber] = argumentYellow;
+            const [tokenColor, tokenNum, diceAction, diceSecondLastNumber] = argumentYellow;
             dispatch(takeTokenOnVictoryPath([tokenColor, tokenNum, diceAction, lapState]));
             if (diceSecondLastNumber !== 6) {
                 dispatch(setUserFinishedTern());
@@ -64,13 +66,18 @@ const Playground = () => {
             console.log("user seted to finished tern")
             setArgumentYellow([])
         }
-
-
     }, [argumentBlue, argumentRed, argumentGreen, argumentYellow])
     const dispatch = useDispatch();
 
+    // #########################################
     // some important fuctions
+    // #########################################
 
+    // color name corrector function
+    const correctColorName = (colorName) => {
+        return (colorName == "rgb(36,113,255)") ? "blue" : colorName;
+    }
+    // %%%%%%%%%% kill feature functions %%%%%%%%%%%%%%% //
     // this fuction will update the state when the any token done 1 lap or remove 1 lap accoring to done or killed by another token,
     const setTokenDoneOneLap = (tokenColor, tokenNum, actionType) => {
         if (actionType === "set") {
@@ -83,20 +90,74 @@ const Playground = () => {
             console.error("condition has breacked in setTokenDoneOneLap")
         }
     };
-    // this fuction will update the state when any token enterd victory path 
-    const victoryPathBoxHandler = (tokenColor, tokenNum) => {
-        dispatch(setTokenInsideOfVictoryPath([tokenColor, tokenNum]));
+    const getTokenPosition = (tokenColor, tokenNum) => {
+        const fixTokenColor = correctColorName(tokenColor);
+        const propertyName = fixTokenColor + "Token";
+        return tokenPosition[propertyName][tokenNum - 1];
+        // console.log(tokenPosition[propertyName][tokenNum - 1])
+    }
+    // this fuction will check there is any target in astimated position or not
+    const isTargetThere = (astimatedPosition) => {
+        console.log("astimated position from isTargetThere", astimatedPosition);
+
+        // Function to find the token's position and index
+        function findElement(element) {
+            for (const [key, array] of Object.entries(tokenPosition)) {
+                console.log(key, array);
+                const index = array.indexOf(element);
+                if (index !== -1) {
+                    const keyColor = key.replace("Token", ""); // Convert token color "redToken" into "red"
+                    return { tokenColor: keyColor, index };   // Return target data if found
+                }
+            }
+            // Return null if no match is found in any array
+            return { tokenColor: null, index: null };
+        }
+
+        return findElement(astimatedPosition);
     };
+
+    // this fuction will check the target token is in cheera or not
+    const isCheeraThere = (astimatedPosition) => {
+        // const cheeras = [3, 8, 14, 20, 27, 33, 39, 45];
+        const cheeras = [3, 11, 16, 24, 29, 37, 42, 50];
+        if (cheeras.includes(astimatedPosition)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // this fuction will kill the token when astimated postion have not any cheera
+    // <<<<<<<========= main master fuction that will kill tokens =========>>>>>>>>>>
+    const KillToken = ([tokenColor, tokenNum, diceAction]) => {
+        console.log("------kill token function called-------------")
+        // console.log(tokenColor,tokenNum,diceAction) //rgb(36,113,255) 1 2
+        const currentPositionToken = getTokenPosition(tokenColor, tokenNum);
+        const astimatedPosition = (diceAction + currentPositionToken) % 52;
+        console.log({ currentPositionToken, astimatedPosition })
+        const isThereCheera = isCheeraThere(astimatedPosition); //true or false
+        const isTargetThereCall = isTargetThere(astimatedPosition);//{ tokenColor: "red", index: 2 } or { tokenColor: null, index: null }
+        console.log(isTargetThereCall)
+        if (isThereCheera) {
+            return "cheera is there"
+        }
+        else if (!isThereCheera && ((isTargetThereCall.tokenColor !== null) && (isTargetThereCall.index !== null))) {
+            dispatch(eliminateToken([isTargetThereCall.tokenColor, isTargetThereCall.index + 1]));// 1 is added for conveting index to tokenNum
+            dispatch(takeInOneToken([isTargetThereCall.tokenColor, isTargetThereCall.index + 1]));// setting the token inside in the home
+            playDiceSould("kill");
+            console.log(`@${isTargetThereCall.tokenColor, isTargetThereCall.index} killed!`)
+            return "token killed"
+        }
+    }
 
     // <<<<<<<========= main master fuction that will move tokens =========>>>>>>>>>>
     const moveToken = (tokenColor, tokenNum) => {
         const { blueDice, redDice, greenDice, yellowDice } = diceNumObj;
         switch (tokenColor) {
-
             case "rgb(36,113,255)":
                 const curretPositionBlue = tokenPosition.blueToken[tokenNum - 1];
                 const diceLastNumberblue = blueDice[blueDice.length - 1];
-
                 // this condition will release the token from home
                 if ((homeStatus.blueToken[tokenNum - 1] === "inside") && (diceLastNumberblue === 6)) {
                     dispatch(releseToken(["blue", tokenNum, diceLastNumberblue]));
@@ -116,17 +177,16 @@ const Playground = () => {
                         dispatch(lockTern("rgb(36,113,255)"));
                     }
                     else {
-
                         if (((curretPositionBlue + diceLastNumberblue) > 52) && (homeStatus.blueToken[tokenNum - 1] === "outside")) {
                             if (curretPositionBlue + diceLastNumberblue > 52) {
                                 if ((curretPositionBlue + diceLastNumberblue === 53)) {
                                     setTokenDoneOneLap("blue", tokenNum, "set"); // setting the token has done 1 lap
                                     dispatch(runToken(["blue", tokenNum, diceLastNumberblue, curretPositionBlue, homeStatus]));
+                                    KillToken(["blue", tokenNum, diceLastNumberblue])
                                     if (diceLastNumberblue !== 6) {
                                         dispatch(setUserFinishedTern())
                                     }
                                     dispatch(lockTern("rgb(36,113,255)"));
-
                                 } else {
                                     setTokenDoneOneLap("blue", tokenNum, "set"); // setting the token has done 1 lap
                                     // this state needs arguments tokenColor, tokenNum, diceAction, and lapstate
@@ -144,6 +204,7 @@ const Playground = () => {
                         }
                         else {
                             dispatch(runToken(["blue", tokenNum, diceLastNumberblue, curretPositionBlue, homeStatus]));
+                            KillToken([tokenColor, tokenNum, diceLastNumberblue]);
                             if (diceLastNumberblue !== 6) {
                                 dispatch(setUserFinishedTern())
                                 console.log("user seted to finished tern")
@@ -151,7 +212,6 @@ const Playground = () => {
                             dispatch(lockTern("rgb(36,113,255)"));
                         }
                     }
-
                 }
                 break;
             case "red":
@@ -170,6 +230,7 @@ const Playground = () => {
                             console.log(`the ${tokenColor} and the tokenNum ${tokenNum} done 1 lap `);
                         }
                         dispatch(runToken(["red", tokenNum, diceLastNumberRed, tokenPosition.redToken[tokenNum - 1], homeStatus]));
+                        KillToken([tokenColor, tokenNum, diceLastNumberRed]);
                         if (diceLastNumberRed !== 6) {
                             dispatch(setUserFinishedTern())
                         }
@@ -191,6 +252,7 @@ const Playground = () => {
                             dispatch(lockTern("red"))
                         } else {
                             dispatch(runToken(["red", tokenNum, diceLastNumberRed, tokenPosition.redToken[tokenNum - 1], homeStatus]));
+                            KillToken([tokenColor, tokenNum, diceLastNumberRed]);
                             if (diceLastNumberRed !== 6) {
                                 dispatch(setUserFinishedTern())
                             }
@@ -220,6 +282,7 @@ const Playground = () => {
                             console.log(`the ${tokenColor} and the tokenNum ${tokenNum} done 1 lap `);
                         }
                         dispatch(runToken([tokenColor, tokenNum, diceLastNumberGreen, tokenPosition.greenToken[tokenNum - 1], homeStatus]));
+                        KillToken([tokenColor, tokenNum, diceLastNumberGreen]);
                         if (diceLastNumberGreen !== 6) {
                             dispatch(setUserFinishedTern())
                         }
@@ -241,6 +304,7 @@ const Playground = () => {
                             dispatch(lockTern(tokenColor))
                         } else {
                             dispatch(runToken([tokenColor, tokenNum, diceLastNumberGreen, currentPositionGreen, homeStatus]));
+                            KillToken([tokenColor, tokenNum, diceLastNumberGreen]);
                             if (diceLastNumberGreen !== 6) {
                                 dispatch(setUserFinishedTern())
                             }
@@ -272,6 +336,7 @@ const Playground = () => {
                             console.log(`the ${tokenColor} and the tokenNum ${tokenNum} done 1 lap `);
                         }
                         dispatch(runToken([tokenColor, tokenNum, diceLastNumberYellow, currentPositionYellow, homeStatus]));
+                        KillToken([tokenColor, tokenNum, diceLastNumberYellow]);
                         if (diceLastNumberYellow !== 6) {
                             dispatch(setUserFinishedTern())
                         }
@@ -297,6 +362,7 @@ const Playground = () => {
                             dispatch(lockTern(tokenColor))
                         } else {
                             dispatch(runToken([tokenColor, tokenNum, diceLastNumberYellow, currentPositionYellow, homeStatus]));
+                            KillToken([tokenColor, tokenNum, diceLastNumberYellow]);
                             if (diceLastNumberYellow !== 6) {
                                 dispatch(setUserFinishedTern())
                             }
@@ -421,7 +487,7 @@ const Playground = () => {
                         <div className="path-box skyblue path-box-number5">
                             <ShowToken pathBoxId={"bh1"} moveToken={moveToken} />
                         </div>
-                        <div className="path-box skyblue path-box-number6">
+                        <div className="path-box skyblue path-box-number6 cheera">
                             <ShowToken pathBoxId={3} moveToken={moveToken} />
                         </div>
                         <div className="path-box skyblue path-box-number7 cheera" ><ShowToken pathBoxId={50} moveToken={moveToken} />
@@ -484,7 +550,7 @@ const Playground = () => {
                         <div className="path-box red path-box-number14"><ShowToken pathBoxId={19} moveToken={moveToken} /></div>
                         <div className="path-box red path-box-number15"><ShowToken pathBoxId={18} moveToken={moveToken} /></div>
                         <div className="path-box red path-box-number16"><ShowToken pathBoxId={17} moveToken={moveToken} /></div>
-                        <div className="path-box red path-box-number17"><ShowToken pathBoxId={16} moveToken={moveToken} /></div>
+                        <div className="path-box red path-box-number17 cheera"><ShowToken pathBoxId={16} moveToken={moveToken} /></div>
                         <div className="path-box red path-box-number18">
                             <ShowToken pathBoxId={15} moveToken={moveToken} />
                         </div>
@@ -502,7 +568,7 @@ const Playground = () => {
                         <div className="path-box green path-box-number10"><ShowToken pathBoxId={30} moveToken={moveToken} /></div>
                         <div className="path-box green path-box-number11"><ShowToken pathBoxId={"gh2"} moveToken={moveToken} /></div>
                         <div className="path-box green path-box-number12 cheera"><ShowToken pathBoxId={24} moveToken={moveToken} /></div>
-                        <div className="path-box green path-box-number13"><ShowToken pathBoxId={29} moveToken={moveToken} /></div>
+                        <div className="path-box green path-box-number13 cheera"><ShowToken pathBoxId={29} moveToken={moveToken} /></div>
                         <div className="path-box green path-box-number14"><ShowToken pathBoxId={"gh1"} moveToken={moveToken} /></div>
                         <div className="path-box green path-box-number15"><ShowToken pathBoxId={25} moveToken={moveToken} /></div>
                         <div className="path-box green path-box-number16"><ShowToken pathBoxId={28} moveToken={moveToken} /></div>
@@ -511,7 +577,7 @@ const Playground = () => {
                     </div>
                     <div className="goti-path yellow goti-path-channel-2">
                         <div className="path-box skyblue path-box-number1"><ShowToken pathBoxId={41} moveToken={moveToken} /></div>
-                        <div className="path-box yellow path-box-number2"><ShowToken pathBoxId={42} moveToken={moveToken} /></div>
+                        <div className="path-box yellow path-box-number2 cheera"><ShowToken pathBoxId={42} moveToken={moveToken} /></div>
                         <div className="path-box yellow path-box-number3"><ShowToken pathBoxId={43} moveToken={moveToken} /></div>
                         <div className="path-box yellow path-box-number4"><ShowToken pathBoxId={44} moveToken={moveToken} /></div>
                         <div className="path-box yellow path-box-number5"><ShowToken pathBoxId={45} moveToken={moveToken} /></div>
